@@ -1,0 +1,7 @@
+# Cloudflare Worker configuration for PeerLink signaling
+name = "peerlink-signaling"
+main = "worker.js"
+compatibility_date = "2024-11-21"
+
+[vars]
+# Add any environment variables here if needed
