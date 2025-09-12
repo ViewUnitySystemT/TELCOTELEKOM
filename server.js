@@ -26,6 +26,11 @@ const config = {
   MONGO_URL: process.env.MONGO_URL || 'mongodb://localhost:27017/peerlink',
   JWT_SECRET: process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex'),
   TURN_SERVERS: process.env.TURN_SERVERS || JSON.stringify(['turn:localhost:3478']),
+  ICE_SERVERS_JSON: process.env.ICE_SERVERS_JSON || JSON.stringify([
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' }
+  ]),
+  PUBLIC_URL: process.env.PUBLIC_URL || 'http://localhost:8080',
   MAX_CONNECTIONS: parseInt(process.env.MAX_CONNECTIONS) || 10000,
   WORKER_COUNT: parseInt(process.env.WORKER_COUNT) || os.cpus().length,
   ENABLE_CLUSTER: process.env.ENABLE_CLUSTER === 'true' || false
@@ -765,6 +770,20 @@ wss.on('connection', (ws, req) => {
         totalConnections: Array.from(rooms.values()).reduce((sum, clients) => sum + clients.size, 0) + 1
     }, req);
 
+    // Sende ICE-Server-Konfiguration an den Client
+    try {
+        const iceServers = JSON.parse(config.ICE_SERVERS_JSON);
+        const configMessage = {
+            type: 'config',
+            iceServers: iceServers,
+            publicUrl: config.PUBLIC_URL
+        };
+        ws.send(JSON.stringify(configMessage));
+        console.log('ICE-Server-Konfiguration gesendet:', iceServers.length, 'Server');
+    } catch (error) {
+        console.error('Fehler beim Senden der ICE-Server-Konfiguration:', error);
+    }
+
     let currentRoomId = null;
 
     ws.on('message', (rawData) => {
@@ -1055,11 +1074,11 @@ server.on('request', (req, res) => {
         handled = true;
     }
 
-    // Serve peerlink.html on root path (mit oder ohne Query-Parameter)
+    // Serve index.html on root path (mit oder ohne Query-Parameter)
     if (!handled && (req.url === '/' || req.url.startsWith('/?')) && req.method === 'GET') {
         try {
             setSecurityHeaders();
-            const htmlContent = fs.readFileSync('peerlink.html', 'utf8');
+            const htmlContent = fs.readFileSync('index.html', 'utf8');
             res.writeHead(200, {
                 'Content-Type': 'text/html; charset=utf-8',
                 'Cache-Control': 'no-cache'

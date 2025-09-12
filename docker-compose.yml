@@ -6,13 +6,73 @@
 version: '3.8'
 
 services:
+  # ===== TRAEFIK REVERSE PROXY MIT LET'S ENCRYPT =====
+  traefik:
+    image: traefik:v3.1
+    container_name: peerlink-traefik
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8081:8080"  # Traefik Dashboard
+    volumes:
+      - traefik-acme:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - DOMAIN=${DOMAIN}
+      - LE_EMAIL=${LE_EMAIL}
+    command:
+      - --api.insecure=false
+      - --providers.docker=true
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.le.acme.httpchallenge=true
+      - --certificatesresolvers.le.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.le.acme.email=${LE_EMAIL}
+      - --certificatesresolvers.le.acme.storage=/letsencrypt/acme.json
+    networks:
+      - peerlink-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.${DOMAIN}`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+
+  # ===== COTURN TURN SERVER =====
+  coturn:
+    image: instrumentisto/coturn
+    container_name: peerlink-coturn
+    restart: unless-stopped
+    network_mode: host   # vereinfacht UDP/NAT, alternativ Ports explizit mappen
+    environment:
+      - TURN_DOMAIN=${TURN_DOMAIN}
+      - TURN_USERNAME=${TURN_USERNAME}
+      - TURN_PASSWORD=${TURN_PASSWORD}
+      - TURN_PORT=${TURN_PORT}
+      - TURNS_PORT=${TURNS_PORT}
+      - TURN_MIN_PORT=${TURN_MIN_PORT}
+      - TURN_MAX_PORT=${TURN_MAX_PORT}
+    command:
+      - --no-cli
+      - --fingerprint
+      - --lt-cred-mech
+      - --realm=${TURN_DOMAIN}
+      - --user=${TURN_USERNAME}:${TURN_PASSWORD}
+      - --no-tls                     # wenn du TLS willst, ersetze durch --cert/--pkey und aktiviere TURNS_PORT
+      - --listening-ip=0.0.0.0
+      - --listening-port=${TURN_PORT}
+      - --min-port=${TURN_MIN_PORT}
+      - --max-port=${TURN_MAX_PORT}
+      - --verbose
+    depends_on:
+      - traefik
+
   # ===== HAUPT-SERVER =====
   peerlink-server:
     image: node:20-alpine
     container_name: peerlink-server
     restart: unless-stopped
-    ports:
-      - "8080:8080"
     working_dir: /app
     volumes:
       - .:/app:ro
@@ -22,6 +82,8 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8080
+      - PUBLIC_URL=${PUBLIC_URL}
+      - ICE_SERVERS_JSON=${ICE_SERVERS_JSON}
     command: >
       sh -c "
       echo '🚀 Starte PeerLink Server...';
@@ -36,8 +98,39 @@ services:
       retries: 3
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.peerlink.rule=Host(`peerlink.local`)"
+      - "traefik.http.routers.peerlink.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.peerlink.entrypoints=websecure"
+      - "traefik.http.routers.peerlink.tls.certresolver=le"
       - "traefik.http.services.peerlink.loadbalancer.server.port=8080"
+    depends_on:
+      - traefik
+      - coturn
+
+  # ===== LIVEKIT SFU SERVER (OPTIONAL) =====
+  livekit:
+    image: livekit/livekit-server:v1
+    container_name: peerlink-livekit
+    restart: unless-stopped
+    command: >
+      --dev
+      --bind 0.0.0.0
+      --rtc.port 7881
+      --ws-url wss://sfu.${DOMAIN}
+      --keys mykey:mysecret
+    ports:
+      - "7881:7881/udp"
+    environment:
+      - DOMAIN=${DOMAIN}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sfu.rule=Host(`sfu.${DOMAIN}`)"
+      - "traefik.http.routers.sfu.entrypoints=websecure"
+      - "traefik.http.routers.sfu.tls.certresolver=le"
+      - "traefik.http.services.sfu.loadbalancer.server.port=7880"
+    networks:
+      - peerlink-network
+    depends_on:
+      - traefik
 
   # ===== MONITORING & BACKUP =====
   peerlink-monitor:
@@ -81,27 +174,13 @@ services:
     depends_on:
       - peerlink-server
 
-  # ===== TRAEFIK REVERSE PROXY =====
-  traefik:
-    image: traefik:v3.0
-    container_name: peerlink-traefik
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-      - "8081:8080"  # Traefik Dashboard
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./traefik.yml:/etc/traefik/traefik.yml:ro
-    networks:
-      - peerlink-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.peerlink.local`)"
-      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
 # ===== VOLUMES =====
 volumes:
+  traefik-acme:
+    driver: local
+    name: peerlink-traefik-acme
+
   peerlink_logs:
     driver: local
     driver_opts:

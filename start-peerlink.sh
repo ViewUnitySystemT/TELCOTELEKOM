@@ -155,7 +155,7 @@ show_status() {
     echo "   Monitoring: http://localhost:8081"
     echo ""
     echo -e "${BLUE}🌐 PeerLink Anwendung:${NC}"
-    echo "   Öffne peerlink.html in deinem Browser"
+    echo "   Öffne index.html in deinem Browser"
     echo "   Oder hoste die Datei auf einem Webserver"
     echo ""
     echo -e "${BLUE}⚙️  Konfiguration:${NC}"

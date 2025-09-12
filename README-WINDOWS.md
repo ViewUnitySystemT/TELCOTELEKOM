@@ -92,7 +92,7 @@ Nach dem Start läuft PeerLink mit folgenden Komponenten:
 
 1. **Browser öffnen**
    - Gehe zu: `http://localhost:8080`
-   - Oder öffne `peerlink.html` direkt im Browser
+   - Oder öffne `index.html` direkt im Browser
 
 2. **Erste Verbindung herstellen**
    - Gib einen Raum-Namen ein

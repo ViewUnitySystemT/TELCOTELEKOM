@@ -10,11 +10,13 @@ test('Main modes and dashboard load', async ({ page }) => {
 
   // Services & Tools Übersicht (klicke gezielt Button mit ID)
   await page.locator('#servicesMode').click();
+  // Warte bis die Services-Übersicht geladen ist
+  await expect(page.locator('#servicesOverview')).toBeVisible();
   await expect(page.getByRole('heading', { name: '🔧 Services & Tools' })).toBeVisible();
 
   // Monitoring Dashboard toggle (scoped auf Services-Overview, um Duplikate zu vermeiden)
   const services = page.locator('#servicesOverview');
-  await services.getByRole('button', { name: /Monitoring Dashboard/ }).first().click();
+  await services.getByRole('button', { name: /Monitoring Dashboard/ }).click();
   await expect(page.getByText('Live Monitoring Dashboard')).toBeVisible();
 });
 
@@ -28,8 +30,9 @@ test('Help search and producer toggle', async ({ page }) => {
 
   // Zurück zur Hauptseite und dann Services & Tools
   await page.getByRole('button', { name: '⬅️ Zurück' }).click();
-  await page.getByRole('button', { name: '🔧 Services & Tools' }).click();
-  await page.getByRole('button', { name: '🎙️ Producer‑Panel' }).click();
+  await page.locator('#servicesMode').click();
+  const services = page.locator('#servicesOverview');
+  await services.getByRole('button', { name: '🎙️ Producer‑Panel' }).click();
   await expect(page.locator('#producerPanel')).toBeVisible();
 });
 
@@ -72,8 +75,8 @@ test('Meeting link parsing sets room and meeting title', async ({ page }) => {
   // Title should be set by parser even if panel hidden
   await expect(page.locator('#meetingTitle')).toHaveValue(title);
   // Ensure the time/meeting UI is revealed for the user
-  await page.getByRole('button', { name: '🕐 Zeit & Meetings' }).click();
-  await page.getByRole('button', { name: '📅 Meeting' }).click();
+  await page.locator('#timeMode').click();
+  await page.locator('#meetingMode').click();
   await expect(page.locator('#meetingPanel')).toBeVisible();
 });
 
@@ -81,7 +84,7 @@ test('Click-to-load Spotify embed only loads after click', async ({ page }) => {
   await page.goto('/');
   await page.locator('#servicesMode').click();
   const services = page.locator('#servicesOverview');
-  await services.getByRole('button', { name: /Producer/ }).click();
+  await services.getByRole('button', { name: '🎙️ Producer‑Panel' }).click();
   await expect(page.locator('#producerPanel')).toBeVisible();
 
   // Vorher: kein Spotify-iframe vorhanden
@@ -95,7 +98,10 @@ test('Click-to-load Spotify embed only loads after click', async ({ page }) => {
 test('QR: opens, renders image and downloads PNG', async ({ page }) => {
   await page.goto('/');
   await page.locator('#showQR').click();
-  await expect(page.locator('#qrCode img')).toBeVisible();
+  
+  // Warte bis der QR-Code generiert wird (asynchron)
+  await expect(page.locator('#qrCode')).toBeVisible();
+  await expect(page.locator('#qrCode img')).toBeVisible({ timeout: 15000 });
 
   const [download] = await Promise.all([
     page.waitForEvent('download'),

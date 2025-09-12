@@ -16,7 +16,7 @@ const server = http.createServer((req, res) => {
   
   if (req.url === '/' && req.method === 'GET') {
     try {
-      const htmlPath = path.join(__dirname, 'peerlink.html');
+      const htmlPath = path.join(__dirname, 'index.html');
       console.log('Serving HTML from:', htmlPath);
       const htmlContent = fs.readFileSync(htmlPath, 'utf8');
       res.writeHead(200, { 'Content-Type': 'text/html' });

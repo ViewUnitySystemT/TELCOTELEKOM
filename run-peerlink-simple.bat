@@ -37,7 +37,7 @@ tasklist /FI "IMAGENAME eq node.exe" | find "node.exe" >nul
 if %ERRORLEVEL% EQU 0 (
     echo ✅ PeerLink Signaling Server erfolgreich gestartet!
     echo.
-    echo 🌐 Öffne peerlink.html in deinem Browser
+    echo 🌐 Öffne index.html in deinem Browser
     echo 📡 WebSocket: ws://localhost:8080
     echo 📊 Monitoring: http://localhost:8080/monitoring
     echo 💚 Health Check: http://localhost:8080/health

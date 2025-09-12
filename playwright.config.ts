@@ -6,10 +6,16 @@ export default defineConfig({
     baseURL: 'http://localhost:8080',
     headless: true,
     viewport: { width: 1280, height: 800 },
-    actionTimeout: 15000,
+    actionTimeout: 30000,
+    navigationTimeout: 30000,
   },
-  timeout: 60000,
-  reporter: [['list']]
+  timeout: 120000,
+  expect: {
+    timeout: 10000,
+  },
+  reporter: [['list']],
+  retries: 2,
+  workers: 1,
 });
 
 

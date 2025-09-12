@@ -116,7 +116,7 @@ echo.
 echo 🛑 Zum Stoppen:
 echo   .\start-peerlink-simple.bat stop
 echo.
-echo 💡 Tipp: Öffne peerlink.html in deinem Browser
+echo 💡 Tipp: Öffne index.html in deinem Browser
 goto end
 
 :stop_system

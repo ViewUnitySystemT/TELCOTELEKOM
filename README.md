@@ -39,14 +39,14 @@ PeerLink ist ein ultraleichtes Peer-to-Peer Kommunikationssystem, das direkt im 
    ```
 
 3. **PeerLink öffnen**:
-   - Öffne `peerlink.html` in deinem Browser
+   - Öffne `index.html` in deinem Browser
    - Konfiguriere bei Bedarf die Server-Einstellungen
 
 ## 📁 Projekt-Struktur
 
 ```
 peerlink/
-├── peerlink.html          # Haupt-PWA-Anwendung
+├── index.html             # Haupt-PWA-Anwendung
 ├── monitoring.html        # Entwickler-Monitoring-Dashboard
 ├── server.js              # WebRTC Signaling-Server
 ├── docker-compose.yml     # TURN-Server Setup
@@ -66,7 +66,7 @@ Die Anwendung erkennt automatisch lokale Server:
 
 ### Manuelle Konfiguration
 
-1. Öffne `peerlink.html`
+1. Öffne `index.html`
 2. Klicke auf **"⚙️ Konfiguration"**
 3. Passe die Server-URLs an deine Bedürfnisse an
 4. **"💾 Speichern"** klicken
@@ -75,7 +75,7 @@ Die Anwendung erkennt automatisch lokale Server:
 
 ### Für Benutzer
 
-1. **PeerLink öffnen**: `peerlink.html` im Browser öffnen
+1. **PeerLink öffnen**: `index.html` im Browser öffnen
 2. **Modus wählen**: Text 💬, Audio 🎤 oder Video 📹
 3. **Link teilen**: QR-Code oder Link kopieren und an Kontakte senden
 4. **Verbinden**: Alle öffnen den gleichen Link und sind automatisch verbunden
@@ -151,9 +151,9 @@ cd peerlink
 
 #### Option 1: Statisches Hosting
 ```bash
-# Lade peerlink.html auf einen Webserver
+# Lade index.html auf einen Webserver
 # Beispiel: Apache, Nginx, GitHub Pages, Netlify
-cp peerlink.html /var/www/html/
+cp index.html /var/www/html/
 ```
 
 #### Option 2: Vollständiges System
@@ -162,7 +162,7 @@ cp peerlink.html /var/www/html/
 # Verwende Docker Compose in Produktion
 docker-compose up -d
 
-# PeerLink-Datei auf HTTPS-Hosting deployen
+# index.html auf HTTPS-Hosting deployen
 # Konfiguriere Produktions-URLs in der App
 ```
 
@@ -322,7 +322,7 @@ npm test
 
 **2. Öffne PeerLink:**
 ```
-http://localhost:8080/peerlink.html
+http://localhost:8080/
 ```
 
 **3. Verbinde dich:**

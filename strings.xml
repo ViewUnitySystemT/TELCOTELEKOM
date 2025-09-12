@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PeerLink</string>
+    <string name="permission_required">Berechtigungen sind für die App-Funktionalität erforderlich</string>
+    <string name="file_chooser_title">Datei auswählen</string>
+</resources>

@@ -1,10 +1,19 @@
-🚀 PeerLink Signaling-Server läuft auf Port 8080
-📊 Monitoring verfügbar unter: http://localhost:8080/monitoring
-💚 Health Check unter: http://localhost:8080/health
-📝 Logs werden in monitoring-data.json gespeichert
-📦 Backup erstellt: backups\monitoring-data.json.2025-09-08T22-34-56-792Z.backup
-🧹 1 alte Backups gelöscht
-✅ Daten erfolgreich gespeichert: monitoring-data.json
-📦 Backup erstellt: backups\monitoring-data.json.2025-09-08T22-35-56-805Z.backup
-🧹 1 alte Backups gelöscht
-✅ Daten erfolgreich gespeichert: monitoring-data.json
+🚨 KRITISCHER FEHLER in uncaughtException: Error: listen EADDRINUSE: address already in use :::8080
+    at Server.setupListenHandle [as _listen2] (node:net:1908:16)
+    at listenInCluster (node:net:1965:12)
+    at Server.listen (node:net:2067:7)
+    at Object.<anonymous> (C:\Users\Gebruiker\Desktop\software\peerlink\Production\Nieuwe map\TELCOTELEKOM\server.js:1166:8)
+    at Module._compile (node:internal/modules/cjs/loader:1469:14)
+    at Module._extensions..js (node:internal/modules/cjs/loader:1548:10)
+    at Module.load (node:internal/modules/cjs/loader:1288:32)
+    at Module._load (node:internal/modules/cjs/loader:1104:12)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:173:12)
+    at node:internal/main/run_main_module:28:49 {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 8080
+}
+🔄 Recovery-Versuch 1/5 für uncaughtException
+✅ Recovery erfolgreich für uncaughtException
