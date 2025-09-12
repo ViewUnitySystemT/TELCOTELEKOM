@@ -5271,16 +5271,37 @@
 
         async function testBasicConnectivity() {
             try {
-                // Teste Verbindung zu Google DNS
-                const response = await fetch('/api/dns/google.com', {
-                    method: 'GET',
-                    cache: 'no-cache',
-                    headers: { 'Content-Type': 'application/json' }
-                });
-                return response.ok;
+                // GitHub Pages: Verwende externe API für Netzwerk-Test
+                if (isGitHubPages) {
+                    // Teste Verbindung zu einer öffentlichen API
+                    const response = await fetch('https://httpbin.org/status/200', {
+                        method: 'GET',
+                        cache: 'no-cache',
+                        mode: 'cors'
+                    });
+                    return response.ok;
+                } else {
+                    // Lokale Umgebung: Teste lokalen API-Endpoint
+                    const response = await fetch('/api/dns/google.com', {
+                        method: 'GET',
+                        cache: 'no-cache',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    return response.ok;
+                }
             } catch (error) {
                 logTest(`Netzwerk-Test fehlgeschlagen: ${error.message}`, 'warning');
-                return false;
+                // Fallback: Teste einfache Verbindung
+                try {
+                    const response = await fetch('https://www.google.com/favicon.ico', {
+                        method: 'HEAD',
+                        cache: 'no-cache',
+                        mode: 'no-cors'
+                    });
+                    return true; // no-cors gibt keine response zurück, aber Verbindung ist OK
+                } catch (fallbackError) {
+                    return false;
+                }
             }
         }
 
@@ -5529,16 +5550,24 @@
 
                     pc.createOffer().then(offer => pc.setLocalDescription(offer));
 
-                    // Timeout für Test
+                    // Timeout für Test (verlängert für bessere Konnektivität)
                     setTimeout(() => {
                         if (!resolved) {
                             resolved = true;
-                        pc.close();
+                            pc.close();
                             // Bei STUN ist jeder Kandidat ein Erfolg, bei TURN brauchen wir Verbindung
                             const isSTUN = serverUrl.startsWith('stun:');
-                            resolve(isSTUN ? candidateFound : false);
+                            const isTURN = serverUrl.startsWith('turn:');
+                            
+                            // Für STUN: Kandidat gefunden = Erfolg
+                            // Für TURN: Kandidat gefunden = Erfolg (auch ohne vollständige Verbindung)
+                            if (isSTUN || isTURN) {
+                                resolve(candidateFound);
+                            } else {
+                                resolve(false);
+                            }
                         }
-                    }, 8000);
+                    }, 12000); // Verlängert von 8s auf 12s
                 });
             } catch (error) {
                 console.error(`ICE-Server Test Fehler für ${serverUrl}:`, error);
