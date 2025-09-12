@@ -3303,9 +3303,9 @@
         let config = {
             signalingUrl: isGitHubPages ? 'wss://signaling.simplewebrtc.com:443' : 'ws://localhost:8080',
             stunServer: 'stun:stun.l.google.com:19302',
-            turnServer: '',
-            turnUsername: '',
-            turnPassword: ''
+            turnServer: 'turn:openrelay.metered.ca:80',
+            turnUsername: 'openrelayproject',
+            turnPassword: 'openrelayproject'
         };
 
         // ==========================================
@@ -5832,19 +5832,28 @@
             const serverConfigs = {
                 eu: [
                     { name: 'EU-STUN-1', url: 'stun:stun.l.google.com:19302', type: 'stun' },
-                    { name: 'EU-TURN-1', url: 'turn:turn.peerlink.eu:3478', type: 'turn' }
+                    { name: 'EU-STUN-2', url: 'stun:stun1.l.google.com:19302', type: 'stun' },
+                    { name: 'EU-TURN-1', url: 'turn:openrelay.metered.ca:80', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' },
+                    { name: 'EU-TURN-2', url: 'turn:openrelay.metered.ca:443', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' }
                 ],
                 us: [
                     { name: 'US-STUN-1', url: 'stun:stun.l.google.com:19302', type: 'stun' },
-                    { name: 'US-TURN-1', url: 'turn:turn.peerlink.us:3478', type: 'turn' }
+                    { name: 'US-STUN-2', url: 'stun:stun1.l.google.com:19302', type: 'stun' },
+                    { name: 'US-TURN-1', url: 'turn:openrelay.metered.ca:80', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' },
+                    { name: 'US-TURN-2', url: 'turn:openrelay.metered.ca:443', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' }
                 ],
                 asia: [
                     { name: 'ASIA-STUN-1', url: 'stun:stun.l.google.com:19302', type: 'stun' },
-                    { name: 'ASIA-TURN-1', url: 'turn:turn.peerlink.asia:3478', type: 'turn' }
+                    { name: 'ASIA-STUN-2', url: 'stun:stun1.l.google.com:19302', type: 'stun' },
+                    { name: 'ASIA-TURN-1', url: 'turn:openrelay.metered.ca:80', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' },
+                    { name: 'ASIA-TURN-2', url: 'turn:openrelay.metered.ca:443', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' }
                 ],
                 global: [
-                    { name: 'GLOBAL-STUN', url: 'stun:stun.l.google.com:19302', type: 'stun' },
-                    { name: 'GLOBAL-TURN', url: 'turn:turn.peerlink.global:3478', type: 'turn' }
+                    { name: 'GLOBAL-STUN-1', url: 'stun:stun.l.google.com:19302', type: 'stun' },
+                    { name: 'GLOBAL-STUN-2', url: 'stun:stun1.l.google.com:19302', type: 'stun' },
+                    { name: 'GLOBAL-STUN-3', url: 'stun:stun2.l.google.com:19302', type: 'stun' },
+                    { name: 'GLOBAL-TURN-1', url: 'turn:openrelay.metered.ca:80', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' },
+                    { name: 'GLOBAL-TURN-2', url: 'turn:openrelay.metered.ca:443', type: 'turn', username: 'openrelayproject', password: 'openrelayproject' }
                 ],
                 auto: [] // Wird automatisch bestimmt
             };
@@ -6777,12 +6786,13 @@
             // STUN-Server (immer verfügbar)
             if (config.stunServer) {
                 iceServers.push({ urls: config.stunServer });
-            } else {
-                // Fallback STUN-Server
-                iceServers.push({ urls: 'stun:stun.l.google.com:19302' });
-                iceServers.push({ urls: 'stun:stun1.l.google.com:19302' });
-                iceServers.push({ urls: 'stun:stun2.l.google.com:19302' });
             }
+            // Zusätzliche STUN-Server für bessere Konnektivität
+            iceServers.push({ urls: 'stun:stun.l.google.com:19302' });
+            iceServers.push({ urls: 'stun:stun1.l.google.com:19302' });
+            iceServers.push({ urls: 'stun:stun2.l.google.com:19302' });
+            iceServers.push({ urls: 'stun:stun3.l.google.com:19302' });
+            iceServers.push({ urls: 'stun:stun4.l.google.com:19302' });
 
             // TURN-Server (falls konfiguriert)
             if (config.turnServer && config.turnUsername && config.turnPassword) {
