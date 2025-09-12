@@ -1,5 +1,5 @@
 {
-  "serverStartTime": "2025-09-12T04:26:43.674Z",
+  "serverStartTime": "2025-09-12T04:29:43.712Z",
   "totalConnections": 0,
   "activeRooms": 0,
   "logs": [],
@@ -105,13 +105,49 @@
       "memoryPercent": 86.59542982081912,
       "heapUsed": 5196280,
       "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:26:43.692Z",
+      "memoryPercent": 87.67958084470989,
+      "heapUsed": 5261336,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:27:13.699Z",
+      "memoryPercent": 87.79090230375427,
+      "heapUsed": 5268016,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:27:43.700Z",
+      "memoryPercent": 88.33044475255973,
+      "heapUsed": 5300392,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:28:13.710Z",
+      "memoryPercent": 88.9819752559727,
+      "heapUsed": 5339488,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:28:43.712Z",
+      "memoryPercent": 89.41352922354949,
+      "heapUsed": 5365384,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:29:13.726Z",
+      "memoryPercent": 90.18931313993174,
+      "heapUsed": 5411936,
+      "heapTotal": 6000640
     }
   ],
   "errorStats": {},
   "metadata": {
-    "timestamp": "2025-09-12T04:26:43.678Z",
+    "timestamp": "2025-09-12T04:29:43.717Z",
     "version": "2.0.0",
-    "checksum": "c985568d8c255729a2378d443ef81fd5b2e8b5d7e43e75526b1abe6e27777d2c",
+    "checksum": "4db66fb7aa79908b5dd103dc5ee1008e9f7e80e4f4b18cb0b5ce4cc3152d69bb",
     "compressed": false
   }
 }
