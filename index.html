@@ -12,8 +12,8 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
-    <!-- Content Security Policy: Server-Header bevorzugt; Meta als Fallback für statische Hosts (z. B. Fleek/IPFS) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; connect-src 'self' https: wss:; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com https://open.spotify.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'">
+    <!-- Content Security Policy: GitHub Pages optimiert -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; connect-src 'self' https: wss: ws:; img-src 'self' data: blob: https: *.bing.net *.mm.bing.net; style-src 'self' 'unsafe-inline' https:; frame-src https://www.youtube-nocookie.com https://open.spotify.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; manifest-src 'self' data:">
 
     <!-- HTTPS Strict Transport Security -->
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
@@ -24,9 +24,12 @@
 
     <!-- Referrer Policy -->
     <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- Permissions Policy für GitHub Pages -->
+    <meta http-equiv="Permissions-Policy" content="compute-pressure=(), camera=(), microphone=(), geolocation=()">
 
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;TELCOTELEKOM&quot;,&quot;short_name&quot;:&quot;TELCOTELEKOM&quot;,&quot;description&quot;:&quot;P2P Kommunikation&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#ffffff&quot;,&quot;theme_color&quot;:&quot;#1e40af&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMxZTQwYWYiLz4KPHBhdGggZD0iTTk2IDQ4QzY5LjQ5IDQ4IDQ4IDY5LjQ5IDQ4IDk2UzY5LjQ5IDE0NCA5NiAxNDRTMTQ0IDEyMi41MSAxNDQgOTZTMTIyLjUxIDQ4IDk2IDQ4Wk05NiAxMjBDNzcuMTYgMTIwIDY0IDEwNi44NCA2NCA4OFM3Ny4xNiA1NiA5NiA1NlMxMjggNjkuMTYgMTI4IDg4UzExNC44NCAxMjAgOTYgMTIwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]}">
+    <!-- PWA Manifest - GitHub Pages optimiert -->
+    <link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;PeerLink&quot;,&quot;short_name&quot;:&quot;PeerLink&quot;,&quot;description&quot;:&quot;P2P Kommunikation&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#ffffff&quot;,&quot;theme_color&quot;:&quot;#2563eb&quot;}">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
