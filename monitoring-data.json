@@ -1,5 +1,5 @@
 {
-  "serverStartTime": "2025-09-12T04:29:43.712Z",
+  "serverStartTime": "2025-09-12T04:34:43.756Z",
   "totalConnections": 0,
   "activeRooms": 0,
   "logs": [],
@@ -141,13 +141,73 @@
       "memoryPercent": 90.18931313993174,
       "heapUsed": 5411936,
       "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:29:43.728Z",
+      "memoryPercent": 91.29292875426621,
+      "heapUsed": 5478160,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:30:13.737Z",
+      "memoryPercent": 91.4110494880546,
+      "heapUsed": 5485248,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:30:43.740Z",
+      "memoryPercent": 92.59438993174062,
+      "heapUsed": 5556256,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:31:13.751Z",
+      "memoryPercent": 67.27034609238814,
+      "heapUsed": 4742032,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:31:43.763Z",
+      "memoryPercent": 68.25723598198722,
+      "heapUsed": 4811600,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:32:13.776Z",
+      "memoryPercent": 68.33191095293434,
+      "heapUsed": 4816864,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:32:43.784Z",
+      "memoryPercent": 69.33548354880882,
+      "heapUsed": 4887608,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:33:13.795Z",
+      "memoryPercent": 69.41333617809413,
+      "heapUsed": 4893096,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:33:43.803Z",
+      "memoryPercent": 70.42746313916328,
+      "heapUsed": 4964584,
+      "heapTotal": 7049216
+    },
+    {
+      "timestamp": "2025-09-12T04:34:13.823Z",
+      "memoryPercent": 70.50849342678676,
+      "heapUsed": 4970296,
+      "heapTotal": 7049216
     }
   ],
   "errorStats": {},
   "metadata": {
-    "timestamp": "2025-09-12T04:29:43.717Z",
+    "timestamp": "2025-09-12T04:34:43.765Z",
     "version": "2.0.0",
-    "checksum": "4db66fb7aa79908b5dd103dc5ee1008e9f7e80e4f4b18cb0b5ce4cc3152d69bb",
+    "checksum": "c13576cd2198bf39699d9471d5606f2e4d49e44812a363a803d6afcd84756b97",
     "compressed": false
   }
 }
