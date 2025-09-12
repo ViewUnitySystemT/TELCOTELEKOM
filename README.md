@@ -15,6 +15,10 @@ PeerLink ist ein ultraleichtes Peer-to-Peer Kommunikationssystem, das direkt im 
 - **📊 Entwickler-Monitoring**: Separate Monitoring-Datei für Statistiken
 - **🌐 Minimaler Aufwand**: Automatischer Verbindungsaufbau mit QR-Codes
 
+## 🌐 Live Demo
+
+**➡️ [Jetzt testen: index.html](https://viewunitysystemt.github.io/TELCOTELEKOM/index.html)**
+
 ## 🚀 Schnellstart
 
 ### Option 1: Automatisch (Empfohlen)
