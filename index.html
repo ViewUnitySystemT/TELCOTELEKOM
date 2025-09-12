@@ -13,7 +13,7 @@
     <meta http-equiv="Expires" content="0">
 
     <!-- Content Security Policy: GitHub Pages optimiert -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; connect-src 'self' 'unsafe-inline' https: wss: ws: data: blob:; img-src 'self' 'unsafe-inline' data: blob: https: *.bing.net *.mm.bing.net tse*.mm.bing.net; style-src 'self' 'unsafe-inline' https: data: blob:; frame-src 'self' 'unsafe-inline' https: data: blob:; base-uri 'self' 'unsafe-inline' https: data: blob:; object-src 'none'; manifest-src 'self' 'unsafe-inline' data: blob:">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:; connect-src 'self' 'unsafe-inline' https: wss: ws: data: blob:; img-src 'self' 'unsafe-inline' data: blob: https: *.bing.net *.mm.bing.net tse*.mm.bing.net *.qrserver.com api.qrserver.com chart.googleapis.com quickchart.io; style-src 'self' 'unsafe-inline' https: data: blob:; frame-src 'self' 'unsafe-inline' https: data: blob:; base-uri 'self' 'unsafe-inline' https: data: blob:; object-src 'none'; manifest-src 'self' 'unsafe-inline' data: blob:">
 
     <!-- HTTPS Strict Transport Security -->
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
@@ -6597,10 +6597,6 @@
         function generateQRCode(text) {
             const qrDiv = document.getElementById('qrCode');
 
-            // Lokaler Offline-Endpoint (server.js)
-            const size = 512;
-            const localUrl = `${window.location.origin}/qr?size=${size}&data=${encodeURIComponent(text)}`;
-
             const qrContainer = document.createElement('div');
             qrContainer.style.textAlign = 'center';
             qrContainer.style.padding = '20px';
@@ -6621,13 +6617,42 @@
             imgWrapper.style.justifyContent = 'center';
             imgWrapper.style.marginBottom = '12px';
 
+            // GitHub Pages kompatible QR-Code-Generierung
             const qrImage = document.createElement('img');
-            qrImage.src = localUrl; // offline lokal
+            
+            // Verwende eine öffentliche QR-Code-API mit mehreren Fallbacks
+            const qrApis = [
+                `https://api.qrserver.com/v1/create-qr-code/?size=512x512&data=${encodeURIComponent(text)}`,
+                `https://chart.googleapis.com/chart?chs=512x512&cht=qr&chl=${encodeURIComponent(text)}`,
+                `https://quickchart.io/qr?text=${encodeURIComponent(text)}&size=512`
+            ];
+            
+            let currentApiIndex = 0;
+            
+            function tryNextApi() {
+                if (currentApiIndex < qrApis.length) {
+                    qrImage.src = qrApis[currentApiIndex];
+                    currentApiIndex++;
+                } else {
+                    console.log('All QR-Code APIs failed, using fallback');
+                    generateSimpleQR(text);
+                    return;
+                }
+            }
+            
             qrImage.alt = 'QR-Code für PeerLink Raum';
             qrImage.style.maxWidth = '260px';
             qrImage.style.border = '2px solid #2563eb';
             qrImage.style.borderRadius = '8px';
-            qrImage.crossOrigin = 'anonymous';
+            
+            // Fallback bei Fehler
+            qrImage.onerror = function() {
+                console.log(`QR-Code API ${currentApiIndex} failed, trying next...`);
+                tryNextApi();
+            };
+            
+            // Starte mit der ersten API
+            tryNextApi();
 
             imgWrapper.appendChild(qrImage);
 
