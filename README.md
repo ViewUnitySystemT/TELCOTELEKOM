@@ -18,6 +18,9 @@ PeerLink ist ein ultraleichtes Peer-to-Peer Kommunikationssystem, das direkt im 
 ## 🌐 Live Demo
 
 **➡️ [Jetzt testen: index.html](https://viewunitysystemt.github.io/TELCOTELEKOM/index.html)**
+**📋 [GitHub Pages Version](https://viewunitysystemt.github.io/TELCOTELEKOM/index-github-pages.html)** *(mit Setup-Anleitung)*
+
+> ⚠️ **Hinweis:** Die GitHub Pages Version benötigt einen externen Signalling-Server. Für die beste Erfahrung verwende die lokale Version.
 
 ## 🚀 Schnellstart
 

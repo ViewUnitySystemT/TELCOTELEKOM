@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PeerLink - Sichere P2P Kommunikation v2.0 (GitHub Pages)</title>
+    <meta name="description" content="Peer-to-Peer Kommunikation mit Text, Audio und Video - einfach und sicher">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- Cache Busting -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' https: wss: ws:; img-src 'self' data: blob: https:; style-src 'self' 'unsafe-inline'; frame-src https://www.youtube-nocookie.com https://open.spotify.com; frame-ancestors 'none'; base-uri 'self'; object-src 'none'">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .warning-banner {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .info-banner {
+            background: #4ecdc4;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+        .button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .button.secondary {
+            background: #2196F3;
+        }
+        .button.secondary:hover {
+            background: #1976D2;
+        }
+        .features {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            margin: 20px 0;
+        }
+        .features h2 {
+            color: white;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .features ul {
+            list-style: none;
+            padding: 0;
+        }
+        .features li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: white;
+        }
+        .features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .setup-instructions {
+            background: rgba(255,255,255,0.95);
+            color: #333;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .setup-instructions h3 {
+            color: #2563eb;
+            margin-bottom: 15px;
+        }
+        .setup-instructions ol {
+            padding-left: 20px;
+        }
+        .setup-instructions li {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e74c3c;
+        }
+        .github-link {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .github-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        .github-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔗 PeerLink</h1>
+            <p>Sichere P2P Kommunikation - Text, Audio & Video</p>
+        </div>
+
+        <div class="warning-banner">
+            ⚠️ GitHub Pages Version - Signalling-Server erforderlich
+        </div>
+
+        <div class="info-banner">
+            💡 Diese Version läuft auf GitHub Pages, benötigt aber einen externen Signalling-Server für P2P-Verbindungen
+        </div>
+
+        <div class="setup-instructions">
+            <h3>🚀 So startest du PeerLink:</h3>
+            <ol>
+                <li><strong>Lokale Version (Empfohlen):</strong>
+                    <br>Lade das Repository herunter und starte den lokalen Server:
+                    <br><span class="code">git clone https://github.com/ViewUnitySystemT/TELCOTELEKOM.git</span>
+                    <br><span class="code">cd TELCOTELEKOM</span>
+                    <br><span class="code">node server.js</span>
+                    <br>Dann öffne: <span class="code">http://localhost:8080</span>
+                </li>
+                <li><strong>Mit externem Signalling-Server:</strong>
+                    <br>Konfiguriere einen öffentlichen WebSocket-Server (z.B. auf Heroku, Railway, oder einem VPS)
+                    <br>Ändere die Signalling-URL in der App-Konfiguration
+                </li>
+                <li><strong>Docker-Version:</strong>
+                    <br><span class="code">docker-compose up</span>
+                    <br>Verfügbar unter: <span class="code">http://localhost:8080</span>
+                </li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="button" onclick="openLocalVersion()">🏠 Lokale Version starten</button>
+            <button class="button secondary" onclick="openGitHubRepo()">📁 GitHub Repository</button>
+            <button class="button secondary" onclick="showConfigHelp()">⚙️ Konfiguration</button>
+        </div>
+
+        <div class="features">
+            <h2>✨ Features</h2>
+            <ul>
+                <li>🎯 Eine einzige HTML-Datei - keine Installation nötig</li>
+                <li>🔒 Ende-zu-Ende verschlüsselt mit WebRTC</li>
+                <li>📱 PWA-fähig - installierbar als App</li>
+                <li>🎥 Multi-Modi: Text, Audio und Video</li>
+                <li>📓 Telefonbuch mit Notizen und Medien</li>
+                <li>🔧 Vollständig konfigurierbar</li>
+                <li>🌐 QR-Code für einfache Verbindung</li>
+                <li>📊 Monitoring und Statistiken</li>
+                <li>🔧 Docker-Support</li>
+                <li>📱 Android APK Build-System</li>
+            </ul>
+        </div>
+
+        <div class="github-link">
+            <a href="https://github.com/ViewUnitySystemT/TELCOTELEKOM" target="_blank">
+                📁 Vollständiges Repository auf GitHub anzeigen
+            </a>
+        </div>
+
+        <div style="text-align: center; margin: 40px 0; color: white; opacity: 0.8;">
+            <p>💡 <strong>Tipp:</strong> Für die beste Erfahrung verwende die lokale Version mit dem integrierten Server</p>
+            <p>🔧 <strong>Support:</strong> Bei Problemen schaue in die README.md oder erstelle ein Issue auf GitHub</p>
+        </div>
+    </div>
+
+    <script>
+        function openLocalVersion() {
+            // Versuche die lokale Version zu öffnen
+            const localUrl = 'http://localhost:8080';
+            
+            // Erstelle ein neues Fenster für die lokale Version
+            const newWindow = window.open(localUrl, '_blank');
+            
+            if (!newWindow) {
+                alert('Popup blockiert! Bitte erlaube Popups für diese Seite oder öffne manuell: ' + localUrl);
+            } else {
+                // Prüfe nach 2 Sekunden, ob die Verbindung erfolgreich war
+                setTimeout(() => {
+                    try {
+                        newWindow.focus();
+                    } catch (e) {
+                        alert('Lokale Version nicht erreichbar. Stelle sicher, dass der Server läuft:\n\n1. Öffne ein Terminal\n2. Navigiere zum Projektordner\n3. Führe aus: node server.js\n4. Öffne: http://localhost:8080');
+                    }
+                }, 2000);
+            }
+        }
+
+        function openGitHubRepo() {
+            window.open('https://github.com/ViewUnitySystemT/TELCOTELEKOM', '_blank');
+        }
+
+        function showConfigHelp() {
+            alert(`PeerLink Konfiguration:
+
+1. LOKALE VERSION (Empfohlen):
+   - Repository klonen: git clone https://github.com/ViewUnitySystemT/TELCOTELEKOM.git
+   - Server starten: node server.js
+   - Öffnen: http://localhost:8080
+
+2. DOCKER VERSION:
+   - docker-compose up
+   - Öffnen: http://localhost:8080
+
+3. EXTERNE SIGNALLING-SERVER:
+   - Einen WebSocket-Server bereitstellen (z.B. auf Heroku, Railway, VPS)
+   - Signalling-URL in der App konfigurieren
+
+4. ANDROID APK:
+   - ./setup-android-apk.bat (Windows)
+   - ./android-project/build-apk.bat
+
+Für weitere Hilfe siehe README.md im Repository.`);
+        }
+
+        // Prüfe, ob wir auf GitHub Pages sind
+        if (window.location.hostname === 'viewunitysystemt.github.io') {
+            console.log('Running on GitHub Pages - local server features disabled');
+        }
+    </script>
+</body>
+</html>

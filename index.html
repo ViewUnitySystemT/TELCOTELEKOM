@@ -3293,8 +3293,12 @@
         let remoteStreams = new Map();
         let connections = new Map(); // Für Telefonbuch
         let peerConnections = new Map(); // Für WebRTC Peer Connections
+        // Automatische Erkennung der Umgebung
+        const isGitHubPages = window.location.hostname === 'viewunitysystemt.github.io';
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        
         let config = {
-            signalingUrl: 'ws://localhost:8080',
+            signalingUrl: isGitHubPages ? 'wss://signaling.simplewebrtc.com:443' : 'ws://localhost:8080',
             stunServer: 'stun:stun.l.google.com:19302',
             turnServer: '',
             turnUsername: '',
@@ -3302,9 +3306,58 @@
         };
 
         // ==========================================
+        // GitHub Pages Warnung
+        // ==========================================
+        function showGitHubPagesWarning() {
+            const warningHtml = `
+                <div id="githubPagesWarning" style="
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                    color: white;
+                    padding: 15px;
+                    text-align: center;
+                    z-index: 10000;
+                    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+                    font-weight: bold;
+                ">
+                    ⚠️ GitHub Pages Version - Für vollständige Funktionen verwende die lokale Version
+                    <button onclick="closeGitHubWarning()" style="
+                        background: rgba(255,255,255,0.2);
+                        border: none;
+                        color: white;
+                        padding: 5px 10px;
+                        margin-left: 15px;
+                        border-radius: 4px;
+                        cursor: pointer;
+                    ">✕</button>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('afterbegin', warningHtml);
+            
+            // Body padding hinzufügen, damit der Inhalt nicht verdeckt wird
+            document.body.style.paddingTop = '60px';
+        }
+
+        function closeGitHubWarning() {
+            const warning = document.getElementById('githubPagesWarning');
+            if (warning) {
+                warning.remove();
+                document.body.style.paddingTop = '0';
+            }
+        }
+
+        // ==========================================
         // Initialisierung
         // ==========================================
         async function init() {
+            // GitHub Pages Warnung anzeigen
+            if (isGitHubPages) {
+                showGitHubPagesWarning();
+            }
+            
             // Sicherheits-Checks durchführen
             performSecurityChecks();
 

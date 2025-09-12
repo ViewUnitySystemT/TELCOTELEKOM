@@ -1,14 +1,87 @@
 {
-  "serverStartTime": "2025-09-12T04:17:43.577Z",
+  "serverStartTime": "2025-09-12T04:23:43.654Z",
   "totalConnections": 0,
   "activeRooms": 0,
   "logs": [],
-  "systemHealth": [],
+  "systemHealth": [
+    {
+      "timestamp": "2025-09-12T04:18:13.583Z",
+      "memoryPercent": 74.32273890784982,
+      "heapUsed": 4459840,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:18:43.600Z",
+      "memoryPercent": 74.51245200511946,
+      "heapUsed": 4471224,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:19:13.611Z",
+      "memoryPercent": 79.765625,
+      "heapUsed": 4786448,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:19:43.617Z",
+      "memoryPercent": 79.89054500853243,
+      "heapUsed": 4793944,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:20:13.629Z",
+      "memoryPercent": 80.64006505972696,
+      "heapUsed": 4838920,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:20:43.629Z",
+      "memoryPercent": 80.7679180887372,
+      "heapUsed": 4846592,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:21:13.639Z",
+      "memoryPercent": 81.53623613481228,
+      "heapUsed": 4892696,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:21:43.639Z",
+      "memoryPercent": 81.80647397610922,
+      "heapUsed": 4908912,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:22:13.647Z",
+      "memoryPercent": 82.48133532423209,
+      "heapUsed": 4949408,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:22:43.650Z",
+      "memoryPercent": 82.61825405290102,
+      "heapUsed": 4957624,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:23:13.651Z",
+      "memoryPercent": 83.43350042662117,
+      "heapUsed": 5006544,
+      "heapTotal": 6000640
+    },
+    {
+      "timestamp": "2025-09-12T04:23:43.654Z",
+      "memoryPercent": 83.57415209044369,
+      "heapUsed": 5014984,
+      "heapTotal": 6000640
+    }
+  ],
   "errorStats": {},
   "metadata": {
-    "timestamp": "2025-09-12T04:17:43.585Z",
+    "timestamp": "2025-09-12T04:23:43.663Z",
     "version": "2.0.0",
-    "checksum": "e41f6baff9dc2e628fd9d34131bea5b39917eb4307b1b3754cc904cab94494f7",
+    "checksum": "783f4a15f72eaa47c57fcd1cc006caf9412e14a0c13cc504cccced32f019f1fa",
     "compressed": false
   }
 }
