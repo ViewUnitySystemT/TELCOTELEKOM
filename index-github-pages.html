@@ -187,9 +187,9 @@
         </div>
 
         <div style="text-align: center; margin: 30px 0;">
-            <button class="button" onclick="openLocalVersion()">🏠 Lokale Version starten</button>
-            <button class="button secondary" onclick="openGitHubRepo()">📁 GitHub Repository</button>
-            <button class="button secondary" onclick="showConfigHelp()">⚙️ Konfiguration</button>
+            <button class="button" onclick="window.open('http://localhost:8080', '_blank')">🏠 Lokale Version starten</button>
+            <button class="button secondary" onclick="window.open('https://github.com/ViewUnitySystemT/TELCOTELEKOM', '_blank')">📁 GitHub Repository</button>
+            <button class="button secondary" onclick="alert('PeerLink Konfiguration:\\n\\n1. LOKALE VERSION (Empfohlen):\\n   - Repository klonen: git clone https://github.com/ViewUnitySystemT/TELCOTELEKOM.git\\n   - Server starten: node server.js\\n   - Öffnen: http://localhost:8080\\n\\n2. DOCKER VERSION:\\n   - docker-compose up\\n   - Öffnen: http://localhost:8080\\n\\n3. EXTERNE SIGNALLING-SERVER:\\n   - Einen WebSocket-Server bereitstellen (z.B. auf Heroku, Railway, VPS)\\n   - Signalling-URL in der App konfigurieren\\n\\n4. ANDROID APK:\\n   - ./setup-android-apk.bat (Windows)\\n   - ./android-project/build-apk.bat\\n\\nFür weitere Hilfe siehe README.md im Repository.')">⚙️ Konfiguration</button>
         </div>
 
         <div class="features">
@@ -209,7 +209,7 @@
         </div>
 
         <div class="github-link">
-            <a href="https://github.com/ViewUnitySystemT/TELCOTELEKOM" target="_blank">
+            <a href="https://github.com/ViewUnitySystemT/TELCOTELEKOM" target="_blank" style="color: white; text-decoration: none; font-size: 1.1em;">
                 📁 Vollständiges Repository auf GitHub anzeigen
             </a>
         </div>
@@ -221,54 +221,6 @@
     </div>
 
     <script>
-        function openLocalVersion() {
-            // Versuche die lokale Version zu öffnen
-            const localUrl = 'http://localhost:8080';
-            
-            // Erstelle ein neues Fenster für die lokale Version
-            const newWindow = window.open(localUrl, '_blank');
-            
-            if (!newWindow) {
-                alert('Popup blockiert! Bitte erlaube Popups für diese Seite oder öffne manuell: ' + localUrl);
-            } else {
-                // Prüfe nach 2 Sekunden, ob die Verbindung erfolgreich war
-                setTimeout(() => {
-                    try {
-                        newWindow.focus();
-                    } catch (e) {
-                        alert('Lokale Version nicht erreichbar. Stelle sicher, dass der Server läuft:\n\n1. Öffne ein Terminal\n2. Navigiere zum Projektordner\n3. Führe aus: node server.js\n4. Öffne: http://localhost:8080');
-                    }
-                }, 2000);
-            }
-        }
-
-        function openGitHubRepo() {
-            window.open('https://github.com/ViewUnitySystemT/TELCOTELEKOM', '_blank');
-        }
-
-        function showConfigHelp() {
-            alert(`PeerLink Konfiguration:
-
-1. LOKALE VERSION (Empfohlen):
-   - Repository klonen: git clone https://github.com/ViewUnitySystemT/TELCOTELEKOM.git
-   - Server starten: node server.js
-   - Öffnen: http://localhost:8080
-
-2. DOCKER VERSION:
-   - docker-compose up
-   - Öffnen: http://localhost:8080
-
-3. EXTERNE SIGNALLING-SERVER:
-   - Einen WebSocket-Server bereitstellen (z.B. auf Heroku, Railway, VPS)
-   - Signalling-URL in der App konfigurieren
-
-4. ANDROID APK:
-   - ./setup-android-apk.bat (Windows)
-   - ./android-project/build-apk.bat
-
-Für weitere Hilfe siehe README.md im Repository.`);
-        }
-
         // Prüfe, ob wir auf GitHub Pages sind
         if (window.location.hostname === 'viewunitysystemt.github.io') {
             console.log('Running on GitHub Pages - local server features disabled');
